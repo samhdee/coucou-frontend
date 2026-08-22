@@ -1,0 +1,59 @@
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/mixins';
+
+$theme-colors: (
+    primary: #25a5e3,
+    danger: #f56476,
+    warning: #f5b700,
+    success: #298f46
+);
+
+// Couleurs
+$violet: #6247aa;
+$lavender: #a06cd5;
+
+$warning-bg-subtle: #fbdeb3;
+
+// Corps
+$body-bg: #231f2a;
+$body-color: white;
+$body-secondary-bg: #322d3b;
+
+// Tableaux
+$table-color: white;
+
+// Boutons
+.btn-primary,
+.btn-success,
+.btn-danger {
+    color: white !important;
+}
+
+$btn-close-color: #fff;
+
+// Liens
+$link-color: $primary;
+
+// Cards
+$card-bg: $body-secondary-bg;
+$card-border-color: #fff;
+
+// Positions
+$position-values: (
+    0: 0,
+    25: 25%,
+    50: 50%,
+    100: 100%,
+);
+
+// Onglets
+$nav-tabs-link-active-color: $body-color;
+
+// Navbar
+$dropdown-bg: $violet;
+$dropdown-link-hover-color: $violet;
+$dropdown-link-active-bg: #fff;
+$dropdown-link-active-color: $violet;
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
