@@ -29,3 +29,13 @@ export async function getTimer(uuid) {
 
     return res.json();
 }
+
+export async function getAllDurations() {
+    const res = await fetch(`${API_URL}/timer/durations`);
+
+    if (!res.ok) {
+        throw new Error('Aucune durée trouvée');
+    }
+
+    return res.json();
+}
