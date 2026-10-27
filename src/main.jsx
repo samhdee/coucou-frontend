@@ -11,7 +11,7 @@ import { RequireAuth } from './components/RequireAuth.jsx';
 createRoot(document.getElementById('root')).render(
     <StrictMode>
         <BrowserRouter>
-            <AuthProvider>
+            {/*<AuthProvider>*/}
                 <Routes>
                     <Route path="/" element={<CreateTimer />} />
                     <Route path="/timer/:uuid" element={<ViewTimer />} />
@@ -24,7 +24,7 @@ createRoot(document.getElementById('root')).render(
                         }
                     />
                 </Routes>
-            </AuthProvider>
+            {/*</AuthProvider>*/}
         </BrowserRouter>
     </StrictMode>,
 )
