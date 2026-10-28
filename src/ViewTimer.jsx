@@ -1,47 +1,39 @@
 import {Link, useParams} from "react-router";
 import {useEffect, useState} from "react";
 import {Container} from "react-bootstrap";
-import { useFetch } from "./hooks/useFetch.js";
+
+import ViewRunningTimer from "./ViewRunningTimer.jsx";
+import ViewPausedTimer from "./ViewPausedTimer.jsx";
+import {useTimer} from "./hooks/useTimer.js";
+import {getData} from "./libs/api.js";
+import {useToggleTimer} from "./hooks/useToggleTimer.js";
 
 export default function ViewTimer() {
     let params = useParams()
-    const [now, setNow] = useState(Date.now())
-    const [loading, data, errors] = useFetch(`timer/${params.uuid}`, {method: 'GET'})
+    const { data, isLoading, error } = useTimer(params.id)
+    const toggleTimer = useToggleTimer(params.id)
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setNow(Date.now())
-        }, 1000)
-
-        return () => {
-            clearInterval(timer)
-        }
-    }, [data])
-
-    if (loading) {
+    if (isLoading) {
         return <div>Chargement…</div>
     }
 
-    if (errors) {
+    if (error) {
         return <div className="alert alert-danger">Impossible de récupérer le timer.</div>
     }
 
-    const endTime = new Date(data.endTime).getTime()
-    const remainingSeconds = Math.max(0, Math.round((endTime - now) / 1000));
-    const minutes = Math.floor(remainingSeconds / 60);
-    let seconds = remainingSeconds % 60;
-
-    if (seconds <= 9) {
-        seconds = '0' + seconds;
+    const handleToggleStatus = () => {
+        console.log(data.status === 'running' ? 'pause' : 'start')
+        toggleTimer.mutate(data.status === 'running' ? 'pause' : 'start')
     }
 
     return (
         <Container className="py-3">
-            <Link to={{pathname: "/"}}>Retour</Link>
+            <Link to={{ pathname: "/" }}>Retour</Link>
 
-            <div id="decrementing-timer" className="mt-3 text-center">
-                {minutes}:{seconds}
-            </div>
+            {data.status === 'running'
+                ? <ViewRunningTimer data={data} handleStatusChange={handleToggleStatus} />
+                : <ViewPausedTimer data={data} handleStatusChange={handleToggleStatus} />
+            }
         </Container>
     )
 }

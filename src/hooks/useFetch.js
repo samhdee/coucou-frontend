@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 const API_URL = import.meta.env.VITE_API_URL;
 const emptyObject = {}
 
-export function useFetch(url, options = emptyObject) {
+export function useFetch(uri, options = emptyObject) {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState(null)
     const [errors, setErrors] = useState(null)
 
     useEffect(() => {
-        fetch(`${API_URL}/${url}`, {
+        fetch(`${API_URL}/${uri}`, {
             ...options,
             headers: {
                 'Accept': 'application/json; charset=UTF-8',
