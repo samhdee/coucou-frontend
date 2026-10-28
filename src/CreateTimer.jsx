@@ -8,7 +8,7 @@ import {createTimer} from "./libs/api_create_timer.js";
 import { useFetch } from './hooks/useFetch.js';
 
 function CreateTimer() {
-    const [inputs, setInputs] = useState({})
+    const [inputs, setInputs] = useState({type: 'task'})
     const [loading, data, errors] = useFetch('timers_preset')
     const navigate = useNavigate();
 
