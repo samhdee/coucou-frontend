@@ -1,4 +1,6 @@
 import {useEffect, useState} from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPause } from '@fortawesome/free-solid-svg-icons';
 
 export default function ViewRunningTimer({ data, handleStatusChange }) {
     const [now, setNow] = useState(Date.now())
@@ -30,7 +32,10 @@ export default function ViewRunningTimer({ data, handleStatusChange }) {
     return (
         <div id="decrementing-timer" className="mt-3 text-center">
             <div>{minutes}:{seconds}</div>
-            <button className="btn btn-secondary" onClick={handleClick}>Pause</button>
+
+            <button className="btn btn-primary" onClick={handleClick}>
+                <FontAwesomeIcon icon={faPause} />
+            </button>
         </div>
     )
 }

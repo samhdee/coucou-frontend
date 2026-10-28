@@ -4,4 +4,13 @@ body {
     #decrementing-timer {
         font-size: 50px;
     }
+
+    .clignote {
+      animation: clignote 2s ease-in-out infinite;
+    }
+
+    @keyframes clignote {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.2; }
+    }
 }

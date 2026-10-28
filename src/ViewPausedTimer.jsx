@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
+
 export default function ViewPausedTimer({ data, handleStatusChange }) {
     const minutes = Math.floor(data.remainingAtPause / 60);
     let seconds = data.remainingAtPause % 60;
@@ -13,11 +16,11 @@ export default function ViewPausedTimer({ data, handleStatusChange }) {
 
     return (
         <div>
-            EN PAUSE
-
             <div id="decrementing-timer" className="mt-3 text-center">
-                <div>{minutes}:{seconds}</div>
-                <button className="btn btn-sm btn-success" onClick={handleClick}>Lancer</button>
+                <div className="clignote">{minutes}:{seconds}</div>
+                <button className="btn btn-sm btn-success" onClick={handleClick}>
+                    <FontAwesomeIcon icon={faPlay} />
+                </button>
             </div>
         </div>
     )
