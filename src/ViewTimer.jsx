@@ -22,7 +22,6 @@ export default function ViewTimer() {
     }
 
     const handleToggleStatus = () => {
-        console.log(data.status === 'running' ? 'pause' : 'start')
         toggleTimer.mutate(data.status === 'running' ? 'pause' : 'start')
     }
 
