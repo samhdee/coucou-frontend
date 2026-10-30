@@ -2,8 +2,8 @@ import {Link, useParams} from "react-router";
 import {useEffect, useState} from "react";
 import {Container} from "react-bootstrap";
 
-import ViewRunningTimer from "./ViewRunningTimer.jsx";
-import ViewPausedTimer from "./ViewPausedTimer.jsx";
+import ViewRunningTimer from "./components/ViewRunningTimer.jsx";
+import ViewPausedTimer from "./components/ViewPausedTimer.jsx";
 import {useTimer} from "./hooks/useTimer.js";
 import {getData} from "./libs/api.js";
 import {useToggleTimer} from "./hooks/useToggleTimer.js";
