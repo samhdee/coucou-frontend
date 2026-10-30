@@ -13,4 +13,27 @@ body {
       0%, 100% { opacity: 1; }
       50%      { opacity: 0.2; }
     }
+
+    #user-bar {
+        position: sticky;
+        display: flex;
+        justify-content: flex-end;
+        padding: 5px 0;
+
+        #user-avatar {
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #user-dropdown {
+            position: absolute;
+            top: 55px;
+            display: none;
+
+            &.show-dropdown {
+                display: block;
+            }
+        }
+    }
 }

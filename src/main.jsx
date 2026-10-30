@@ -8,14 +8,19 @@ import ViewTimer from "./ViewTimer.jsx";
 import Dashboard from './Dashboard.jsx';
 import { AuthProvider } from './auth/context/AuthContext.jsx';
 import { RequireAuth } from './components/RequireAuth.jsx';
+import User from './components/User.jsx';
 
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <BrowserRouter>
-            <QueryClientProvider client={queryClient}>
-                {/*<AuthProvider>*/}
+        <AuthProvider>
+            <BrowserRouter>
+                <QueryClientProvider client={queryClient}>
+                    <header>
+                        <User />
+                    </header>
+
                     <Routes>
                         <Route path="/" element={<CreateTimer />} />
                         <Route path="/timer/:id" element={<ViewTimer />} />
@@ -23,8 +28,8 @@ createRoot(document.getElementById('root')).render(
                             <RequireAuth><Dashboard /></RequireAuth>
                         } />
                     </Routes>
-                {/*</AuthProvider>*/}
-            </QueryClientProvider>
-        </BrowserRouter>
+                </QueryClientProvider>
+            </BrowserRouter>
+        </AuthProvider>
     </StrictMode>,
 )

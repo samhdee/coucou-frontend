@@ -56,6 +56,8 @@ function CreateTimer() {
                 ))}
             </div>
 
+            <p>Nouveau timer :</p>
+
             <div className="form-group">
                 <select name="type" className="form-select" onChange={handleChange}>
                     <option value="task">Tâche</option>
