@@ -39,7 +39,7 @@ function CreateTimer() {
     }
 
     return (
-        <Container className="mx-auto py-3 w-25">
+        <Container id="view-timer-wrapper" className="mx-auto py-3 w-25">
             {errors && <div className='alert alert-danger'>Erreur lors du chargement des pré-sets</div>}
 
             <div className="mb-4">
@@ -48,7 +48,7 @@ function CreateTimer() {
                 {data && data.map(item => (
                     <button
                         key={item.id}
-                        className="me-2 btn btn-sm btn-primary"
+                        className={`mt-2 me-2 btn btn-sm preset-${item.type}`}
                         onClick={() => handleSelectPreset(item.value, item.type)}
                     >
                         {item.type === 'task' ? 'Tâche' : 'Pause'} : {item.value / 60}
