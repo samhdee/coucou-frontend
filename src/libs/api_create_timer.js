@@ -15,3 +15,7 @@ export async function getTimer(id) {
 export async function getAllDurations() {
     return await getData('timer/durations');
 }
+
+export async function createSevenByNine() {
+    return await getData('seven-by-nine');
+}

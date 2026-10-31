@@ -15,13 +15,12 @@ export default function ViewPausedTimer({ data, handleStatusChange }) {
     }
 
     return (
-        <div>
-            <div id="decrementing-timer" className="mt-3 text-center">
-                <div className="clignote">{minutes}:{seconds}</div>
-                <button className="btn btn-sm btn-success" onClick={handleClick}>
-                    <FontAwesomeIcon icon={faPlay} />
-                </button>
-            </div>
+        <div id="decrementing-timer" className="mt-3 text-center">
+            <div className="clignote">{minutes}:{seconds}</div>
+
+            <button className="btn btn-sm btn-success" onClick={handleClick}>
+                <FontAwesomeIcon icon={faPlay} />
+            </button>
         </div>
     )
 }

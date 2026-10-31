@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import CreateTimer from './CreateTimer.jsx'
 import ViewTimer from "./ViewTimer.jsx";
+import ViewSevenByNine from "./ViewSevenByNine.jsx";
 import Dashboard from './Dashboard.jsx';
 import { AuthProvider } from './auth/context/AuthContext.jsx';
 import { RequireAuth } from './components/RequireAuth.jsx';
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
                     <Routes>
                         <Route path="/" element={<CreateTimer />} />
                         <Route path="/timer/:id" element={<ViewTimer />} />
+                        <Route path="/seven-by-nine/:id" element={<ViewSevenByNine />} />
                         <Route path="/dashboard" element={
                             <RequireAuth><Dashboard /></RequireAuth>
                         } />

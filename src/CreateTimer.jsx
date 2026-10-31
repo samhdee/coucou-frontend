@@ -2,10 +2,10 @@ import {useState} from 'react'
 import {useNavigate} from "react-router";
 import {Container} from "react-bootstrap";
 
-import "../styles/app.scss"
-
-import {createTimer} from "./libs/api_create_timer.js";
+import { createTimer, createSevenByNine } from "./libs/api_create_timer.js";
 import { useFetch } from './hooks/useFetch.js';
+
+import "../styles/app.scss"
 
 function CreateTimer() {
     const [inputs, setInputs] = useState({type: 'task'})
@@ -33,6 +33,11 @@ function CreateTimer() {
         navigate(`/timer/${response.id}`)
     }
 
+    const handleSevenByNineSubmit = async e => {
+        e.preventDefault()
+        createSevenByNine().then(response => navigate(`/seven-by-nine/${response.id}`))
+    }
+
     const handleSelectPreset = async (duration, type) => {
         const response = await createTimer(duration, 'running', type)
         navigate(`/timer/${response.id}`)
@@ -56,38 +61,50 @@ function CreateTimer() {
                 ))}
             </div>
 
-            <p>Nouveau timer :</p>
+            <div className="mt-4">
+                <p>7x9 :</p>
 
-            <div className="form-group">
-                <select name="type" className="form-select" onChange={handleChange}>
-                    <option value="task">Tâche</option>
-                    <option value="pause">Pause</option>
-                </select>
+                <div>
+                    <button className="btn btn-primary" onClick={handleSevenByNineSubmit}>
+                        Lancer
+                    </button>
+                </div>
             </div>
 
-            <div className="mt-3 form-group">
-                <input
-                    type="number"
-                    name="durationInMinutes"
-                    className="form-control"
-                    value={inputs.durationInMinutes}
-                    onChange={handleChange}
-                />
-            </div>
+            <div className="mt-4">
+                <p>Nouveau timer :</p>
 
-            <div className="mt-3 form-group">
-                <label className="me-1 form-label" htmlFor="form-pause-check">Démarrer en pause ?</label>
-                <input
-                    id="form-pause-check"
-                    type="checkbox"
-                    name="isPauseChecked"
-                    className="form-inline-check"
-                    onChange={handleChange}
-                    checked={inputs.isPauseChecked}
-                />
-            </div>
+                <div className="form-group">
+                    <select name="type" className="form-select" onChange={handleChange}>
+                        <option value="task">Tâche</option>
+                        <option value="pause">Pause</option>
+                    </select>
+                </div>
 
-            <button className="mt-3 btn btn-primary" onClick={handleSubmit}>Submit</button>
+                <div className="mt-3 form-group">
+                    <input
+                        type="number"
+                        name="durationInMinutes"
+                        className="form-control"
+                        value={inputs.durationInMinutes}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className="mt-3 form-group">
+                    <label className="me-1 form-label" htmlFor="form-pause-check">Démarrer en pause ?</label>
+                    <input
+                        id="form-pause-check"
+                        type="checkbox"
+                        name="isPauseChecked"
+                        className="form-inline-check"
+                        onChange={handleChange}
+                        checked={inputs.isPauseChecked}
+                    />
+                </div>
+
+                <button className="mt-3 btn btn-primary" onClick={handleSubmit}>Submit</button>
+            </div>
         </Container>
     )
 }
