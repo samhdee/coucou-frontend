@@ -25,12 +25,20 @@ export default function ViewTimer() {
         toggleTimer.mutate(data.status === 'running' ? 'pause' : 'start')
     }
 
+    const handleEndTimer = () => {
+
+    }
+
     return (
         <Container className="py-3">
             <Link to={{ pathname: "/" }}>Retour</Link>
 
             {data.status === 'running'
-                ? <ViewRunningTimer data={data} handleStatusChange={handleToggleStatus} />
+                ? <ViewRunningTimer
+                    data={data}
+                    handleStatusChange={handleToggleStatus}
+                    handleEndTimer={handleEndTimer}
+                />
                 : <ViewPausedTimer data={data} handleStatusChange={handleToggleStatus} />
             }
         </Container>

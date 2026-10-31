@@ -17,3 +17,16 @@ export async function getData(uri) {
 
     return res.json();
 }
+
+export async function patchData(uri) {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/${uri}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+    })
+
+    if (!res.ok) {
+        throw new Error('Impossible de terminer le timer')
+    }
+
+    return res.json()
+}
