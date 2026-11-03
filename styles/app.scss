@@ -52,4 +52,13 @@ body {
     #drawn-value-wrapper {
         width: 110px;
     }
+
+    footer {
+        position: sticky;
+        bottom: 0;
+
+        a {
+            color: white;
+        }
+    }
 }
