@@ -35,7 +35,7 @@ export default function User() {
                 </>
                 )
                 : <a
-                    href={`${import.meta.env.VITE_API_URL}/auth/discord`}
+                    href={`${import.meta.env.VITE_API_URL}/auth/discord?redir=${location.pathname}`}
                     className="btn btn-sm btn-primary"
                 >
                     Connexion
