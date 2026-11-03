@@ -1,17 +1,22 @@
 import {Link, useParams} from "react-router";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Container} from "react-bootstrap";
 
 import ViewRunningTimer from "./components/ViewRunningTimer.jsx";
 import ViewPausedTimer from "./components/ViewPausedTimer.jsx";
+import ViewEndedTimer from "./components/ViewEndedTimer.jsx";
 import {useTimer} from "./hooks/useTimer.js";
-import {getData} from "./libs/api.js";
 import {useToggleTimer} from "./hooks/useToggleTimer.js";
 
 export default function ViewTimer() {
     let params = useParams()
+    const [hasEnded, setHasEnded] = useState(false)
     const { data, isLoading, error } = useTimer(params.id)
     const toggleTimer = useToggleTimer(params.id)
+
+    const handleEndTimer = () => {
+        setHasEnded(true)
+    }
 
     if (isLoading) {
         return <div>Chargement…</div>
@@ -21,12 +26,12 @@ export default function ViewTimer() {
         return <div className="alert alert-danger">Impossible de récupérer le timer.</div>
     }
 
-    const handleToggleStatus = () => {
-        toggleTimer.mutate(data.status === 'running' ? 'pause' : 'start')
+    if (hasEnded) {
+        return <ViewEndedTimer data={data} />
     }
 
-    const handleEndTimer = () => {
-
+    const handleToggleStatus = () => {
+        toggleTimer.mutate(data.status === 'running' ? 'pause' : 'start')
     }
 
     return (
@@ -35,11 +40,16 @@ export default function ViewTimer() {
 
             {data.status === 'running'
                 ? <ViewRunningTimer
+                    key={data.id }
                     data={data}
                     handleStatusChange={handleToggleStatus}
                     handleEndTimer={handleEndTimer}
                 />
-                : <ViewPausedTimer data={data} handleStatusChange={handleToggleStatus} />
+                : <ViewPausedTimer
+                    key={data.id}
+                    data={data}
+                    handleStatusChange={handleToggleStatus}
+                />
             }
         </Container>
     )

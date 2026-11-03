@@ -10,8 +10,9 @@ import CreateTimer from './CreateTimer.jsx'
 import ViewTimer from "./ViewTimer.jsx";
 import ViewSevenByNine from "./ViewSevenByNine.jsx";
 import { AuthProvider } from './auth/context/AuthContext.jsx';
-import { RequireAuth } from './components/RequireAuth.jsx';
 import User from './components/User.jsx';
+
+import "../styles/app.scss"
 
 const queryClient = new QueryClient()
 
@@ -32,7 +33,11 @@ createRoot(document.getElementById('root')).render(
 
                     <footer>
                         <Container>
-                            <a href="https://github.com/samhdee/coucou-frontend" target="_blank" rel="noopener noreferrer">
+                            <a
+                                href="https://github.com/stars/samhdee/lists/coucou"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 <FontAwesomeIcon icon={faGithub} />
                             </a>
                         </Container>

@@ -2,14 +2,11 @@ import {useState} from 'react'
 import {useNavigate} from "react-router";
 import {Container} from "react-bootstrap";
 
+import ViewTimersPresets from './components/ViewTimersPresets.jsx';
 import { createTimer, createSevenByNine } from "./libs/api_create_timer.js";
-import { useFetch } from './hooks/useFetch.js';
-
-import "../styles/app.scss"
 
 function CreateTimer() {
     const [inputs, setInputs] = useState({type: 'task'})
-    const [loading, data, errors] = useFetch('timers_preset')
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -38,28 +35,9 @@ function CreateTimer() {
         createSevenByNine().then(response => navigate(`/seven-by-nine/${response.id}`))
     }
 
-    const handleSelectPreset = async (duration, type) => {
-        const response = await createTimer(duration, 'running', type)
-        navigate(`/timer/${response.id}`)
-    }
-
     return (
         <Container id="view-timer-wrapper" className="mx-auto py-3 w-25">
-            {errors && <div className='alert alert-danger'>Erreur lors du chargement des pré-sets</div>}
-
-            <div className="mb-4">
-                <p>Pré-sets :</p>
-
-                {data && data.map(item => (
-                    <button
-                        key={item.id}
-                        className={`mt-2 me-2 btn btn-sm preset-${item.type}`}
-                        onClick={() => handleSelectPreset(item.value, item.type)}
-                    >
-                        {item.type === 'task' ? 'Tâche' : 'Pause'} : {item.value / 60}
-                    </button>
-                ))}
-            </div>
+            <ViewTimersPresets />
 
             <div className="mt-4">
                 <p>7x9 :</p>

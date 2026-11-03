@@ -36,8 +36,13 @@ export default function ViewRunningTimer({ data, handleStatusChange, handleEndTi
     }
 
     return (
-        <div id="decrementing-timer" className="mt-3 text-center">
-            <div>{minutes}:{seconds}</div>
+        <div className="mt-3 text-center">
+            {data.type === 'pause'
+                ? <div>C’est la pause</div>
+                : <div>Tâche en cours</div>
+            }
+
+            <div id="decrementing-timer">{minutes}:{seconds}</div>
 
             <button className="btn btn-sm btn-primary" onClick={handleClick}>
                 <FontAwesomeIcon icon={faPause} />
