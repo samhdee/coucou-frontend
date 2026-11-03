@@ -4,26 +4,25 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useFetch } from '../hooks/useFetch.js';
 import { createTimer } from "../libs/api_create_timer.js";
 
-export default function ViewTimersPresets() {
+export default function ViewTimersPresets({type}) {
     const params = useParams()
     const navigate = useNavigate()
     const queryClient = useQueryClient()
 
-    const options_fetch = params.type
+    const options_fetch = type
         ? {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({'type': params.type})
+            body: JSON.stringify({'type': type})
         }
         : {method: 'GET'}
     const [loading, data, errors] = useFetch('timers_preset', options_fetch)
 
     const handleSelectPreset = async (duration, type) => {
         createTimer(duration, 'running', type).then(response => {
-                queryClient.invalidateQueries({queryKey: ['timer', params.id]})
-                navigate(`/timer/${response.id}`)
-            }
-        )
+            queryClient.invalidateQueries({queryKey: ['timer', params.id]})
+            navigate(`/timer/${response.id}`)
+        })
     }
 
     if (loading) {

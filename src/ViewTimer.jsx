@@ -27,7 +27,7 @@ export default function ViewTimer() {
     }
 
     if (hasEnded) {
-        return <ViewEndedTimer data={data} />
+        return <ViewEndedTimer key={data.id} data={data} />
     }
 
     const handleToggleStatus = () => {
