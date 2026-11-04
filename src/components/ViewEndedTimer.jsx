@@ -9,7 +9,7 @@ export default function ViewEndedTimer({data}) {
             <Link to={{ pathname: "/" }}>Retour</Link>
 
             <div id="ended-timer" className="mt-3 text-center">
-                <div>0:00</div>
+                <div className="decrementing-timer">0:00</div>
 
                 {data.type === 'pause'
                     ? <>
@@ -18,7 +18,6 @@ export default function ViewEndedTimer({data}) {
                     </>
                     : <>
                         <p>Une petite pause ?</p>
-
                         <ViewTimersPresets type="pause" />
                     </>
                 }

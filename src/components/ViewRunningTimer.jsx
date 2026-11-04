@@ -42,7 +42,7 @@ export default function ViewRunningTimer({ data, handleStatusChange, handleEndTi
                 : <div>Tâche en cours</div>
             }
 
-            <div id="decrementing-timer">{minutes}:{seconds}</div>
+            <div className="decrementing-timer">{minutes}:{seconds}</div>
 
             <button className="btn btn-sm btn-primary" onClick={handleClick}>
                 <FontAwesomeIcon icon={faPause} />

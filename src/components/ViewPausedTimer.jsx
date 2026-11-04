@@ -15,7 +15,7 @@ export default function ViewPausedTimer({ data, handleStatusChange }) {
     }
 
     return (
-        <div id="decrementing-timer" className="mt-3 text-center">
+        <div className="mt-3 text-center decrementing-timer fs-2">
             <div className="clignote">{minutes}:{seconds}</div>
 
             <button className="btn btn-sm btn-success" onClick={handleClick}>

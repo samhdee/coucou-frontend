@@ -8,11 +8,15 @@ import ViewEndedTimer from "./components/ViewEndedTimer.jsx";
 import {useTimer} from "./hooks/useTimer.js";
 import {useToggleTimer} from "./hooks/useToggleTimer.js";
 
-export default function ViewTimer() {
-    let params = useParams()
+export default function ViewTimerPage() {
+    const {id} = useParams();
+    return <ViewTimer key={id} id={id} />
+}
+
+function ViewTimer({ id }) {
     const [hasEnded, setHasEnded] = useState(false)
-    const { data, isLoading, error } = useTimer(params.id)
-    const toggleTimer = useToggleTimer(params.id)
+    const { data, isLoading, error } = useTimer(id)
+    const toggleTimer = useToggleTimer(id)
 
     const handleEndTimer = () => {
         setHasEnded(true)
@@ -27,7 +31,7 @@ export default function ViewTimer() {
     }
 
     if (hasEnded) {
-        return <ViewEndedTimer key={data.id} data={data} />
+        return <ViewEndedTimer data={data} />
     }
 
     const handleToggleStatus = () => {

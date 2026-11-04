@@ -3,7 +3,11 @@
 body {
     font-size: 16px;
 
-    #decrementing-timer {
+    p {
+        margin: .5rem 0;
+    }
+
+    .decrementing-timer {
         font-size: 50px;
     }
 
