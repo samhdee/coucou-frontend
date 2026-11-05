@@ -25,14 +25,16 @@ createRoot(document.getElementById('root')).render(
                         <User />
                     </header>
 
-                    <Routes>
-                        <Route path="/" element={<CreateTimer />} />
-                        <Route path="/timer/:id" element={<ViewTimer />} />
-                        <Route path="/seven-by-nine/:id" element={<ViewSevenByNine />} />
-                    </Routes>
+                    <div id="main-container">
+                        <Routes>
+                            <Route path="/" element={<CreateTimer />} />
+                            <Route path="/timer/:id" element={<ViewTimer />} />
+                            <Route path="/seven-by-nine/:id" element={<ViewSevenByNine />} />
+                        </Routes>
+                    </div>
 
                     <footer>
-                        <Container>
+                        <Container className="text-center">
                             <a
                                 href="https://github.com/stars/samhdee/lists/coucou"
                                 target="_blank"

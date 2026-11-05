@@ -8,6 +8,7 @@ import ViewPausedTimer from "./components/ViewPausedTimer.jsx";
 import {useSevenByNine} from "./hooks/useSevenByNine.js";
 import {useToggleTimer} from "./hooks/useToggleTimer.js";
 import {useEndTimer} from "./hooks/useEndTimer.js";
+import BackButton from "./components/BackButton.jsx";
 
 export default function SevenByNine() {
     const params = useParams()
@@ -62,7 +63,7 @@ export default function SevenByNine() {
 
     return (
         <Container className="py-3">
-            <Link to={{pathname: "/"}}>Retour</Link>
+            <BackButton />
 
             <div className="mt-3 text-center">
                 En cours : {data.currentTimer.type === 'task'

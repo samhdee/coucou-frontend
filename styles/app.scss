@@ -3,66 +3,84 @@
 body {
     font-size: 16px;
 
-    p {
-        margin: .5rem 0;
-    }
+    #root {
+        position: relative;
+        height: 100vh;
+        padding-bottom: 50px;
 
-    .decrementing-timer {
-        font-size: 50px;
-    }
-
-    .clignote {
-      animation: clignote 2s ease-in-out infinite;
-    }
-
-    @keyframes clignote {
-      0%, 100% { opacity: 1; }
-      50%      { opacity: 0.2; }
-    }
-
-    #user-bar {
-        position: sticky;
-        display: flex;
-        justify-content: flex-end;
-        padding: 5px 0;
-
-        #user-avatar {
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
+        #main-container {
+            height: 95%;
         }
 
-        #user-dropdown {
-            position: absolute;
-            top: 55px;
-            display: none;
+        p {
+            margin: .5rem 0;
+        }
 
-            &.show-dropdown {
-                display: block;
+        .back-btn {
+            color: white;
+        }
+
+        .decrementing-timer {
+            font-size: 50px;
+        }
+
+        .clignote {
+            animation: clignote 2s ease-in-out infinite;
+        }
+
+        @keyframes clignote {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.2;
             }
         }
-    }
 
-    #timers-presets-wrapper {
-        .preset-task {
-            background: #74226c;
+        #user-bar {
+            position: sticky;
+            display: flex;
+            justify-content: flex-end;
+            padding: 5px 0;
+
+            #user-avatar {
+                height: 40px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            #user-dropdown {
+                position: absolute;
+                top: 55px;
+                display: none;
+
+                &.show-dropdown {
+                    display: block;
+                }
+            }
         }
 
-        .preset-pause {
-            background: #888;
+        #timers-presets-wrapper {
+            .preset-task {
+                background: #74226c;
+            }
+
+            .preset-pause {
+                background: #888;
+            }
         }
-    }
 
-    #drawn-value-wrapper {
-        width: 110px;
-    }
+        #drawn-value-wrapper {
+            width: 110px;
+        }
 
-    footer {
-        position: sticky;
-        bottom: 0;
+        footer {
+            position: sticky;
+            bottom: 0;
 
-        a {
-            color: white;
+            a {
+                color: white;
+            }
         }
     }
 }

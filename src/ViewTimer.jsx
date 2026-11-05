@@ -7,6 +7,7 @@ import ViewPausedTimer from "./components/ViewPausedTimer.jsx";
 import ViewEndedTimer from "./components/ViewEndedTimer.jsx";
 import {useTimer} from "./hooks/useTimer.js";
 import {useToggleTimer} from "./hooks/useToggleTimer.js";
+import BackButton from "./components/BackButton.jsx";
 
 export default function ViewTimerPage() {
     const {id} = useParams();
@@ -40,7 +41,7 @@ function ViewTimer({ id }) {
 
     return (
         <Container className="py-3">
-            <Link to={{ pathname: "/" }}>Retour</Link>
+            <BackButton />
 
             {data.status === 'running'
                 ? <ViewRunningTimer

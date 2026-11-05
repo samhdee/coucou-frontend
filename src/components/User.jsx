@@ -23,6 +23,7 @@ export default function User() {
                             <img
                                 id="user-avatar"
                                 src={`${import.meta.env.VITE_DISCORD_CDN_URL}/${user.discordId}/${user.avatar}`}
+                                alt="Avatar du compte Discord"
                             />
                         </a>
                     </div>

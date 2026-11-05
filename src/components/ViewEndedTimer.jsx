@@ -1,9 +1,32 @@
+import {useEffect, useRef} from "react";
 import {Link} from "react-router";
 import {Container} from "react-bootstrap";
 
 import ViewTimersPresets from "./ViewTimersPresets";
 
 export default function ViewEndedTimer({data}) {
+    const audioRef = useRef(null);
+
+    // Précharger le son une seule fois
+    useEffect(() => {
+        const timer_ding_filename = data.type === 'task' ? 'task-ended-ding' : 'pause-ended-ding'
+        const audio = new Audio(`/sounds/${timer_ding_filename}.mp3`)
+        audio.loop = false; // optionnel : boucle jusqu'à ce que l'utilisateur ferme
+
+        audio.play()
+            .catch((err) => {
+                if (err.name !== 'AbortError') {
+                    console.error('Impossible de jouer le son :', err);
+                }
+            });
+
+        // Nettoyage : coupe le son quand le composant se démonte
+        return () => {
+          audio.pause();
+          audio.currentTime = 0;
+        };
+      }, []);
+
     return (
         <Container className="py-3">
             <Link to={{ pathname: "/" }}>Retour</Link>
