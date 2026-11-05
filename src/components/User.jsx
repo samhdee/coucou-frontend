@@ -1,12 +1,14 @@
-import {useState} from 'react'
+import { useState } from 'react'
+import { useLocation } from 'react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
 import { useAuth } from '../auth/context/AuthContext';
 
 export default function User() {
     const {user, loading, logout} = useAuth()
     const [showDropdown, setShowDropdown] = useState(false)
+    const location = useLocation()
 
     const handleClick = e => {
         setShowDropdown(!showDropdown)
