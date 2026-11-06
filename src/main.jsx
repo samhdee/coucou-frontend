@@ -7,12 +7,14 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import {Container} from "react-bootstrap";
 
 import CreateTimer from './CreateTimer.jsx'
-import ViewTimer from "./ViewTimer.jsx";
+import Dashboard from "./Dashboard.jsx";
 import ViewSevenByNine from "./ViewSevenByNine.jsx";
+import ViewTimer from "./ViewTimer.jsx";
 import { AuthProvider } from './auth/context/AuthContext.jsx';
 import User from './components/User.jsx';
 
 import "../styles/app.scss"
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 const queryClient = new QueryClient()
 
@@ -30,6 +32,10 @@ createRoot(document.getElementById('root')).render(
                             <Route path="/" element={<CreateTimer />} />
                             <Route path="/timer/:id" element={<ViewTimer />} />
                             <Route path="/seven-by-nine/:id" element={<ViewSevenByNine />} />
+
+                            <Route element={<ProtectedRoute />}>
+                                <Route path="/dashboard" element={<Dashboard />} />
+                            </Route>
                         </Routes>
                     </div>
 

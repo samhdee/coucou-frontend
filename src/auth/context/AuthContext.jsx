@@ -11,9 +11,9 @@ export function AuthProvider({ children }) {
         fetch(`${API_URL}/auth/me`, { credentials: 'include' })
             .then((res) => (res.ok ? res.json() : null))
             .then(setUser)
-            .catch(() => {
+            .catch(error => {
                 setUser(null)
-                console.error
+                console.error(error)
             })
             .finally(() => setLoading(false));
     }, []);

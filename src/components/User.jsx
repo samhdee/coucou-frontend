@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useLocation } from 'react-router'
+import {Link, useLocation} from 'react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
@@ -30,6 +30,10 @@ export default function User() {
 
                     <div id="user-dropdown" className={showDropdown ? 'show-dropdown' : ''}>
                         <div>{user.username}</div>
+
+                        <div>
+                            <Link to={`/dashboard`}>Mon compte</Link>
+                        </div>
 
                         <button className="btn btn-sm btn-primary" onClick={logout}>
                             <FontAwesomeIcon icon={faRightFromBracket} />
