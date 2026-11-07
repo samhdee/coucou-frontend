@@ -1,13 +1,14 @@
-import { useParams, useNavigate } from "react-router";
+import {useParams, useNavigate, useLocation} from "react-router";
 import { useQueryClient } from '@tanstack/react-query'
 
 import { useFetch } from '../hooks/useFetch.js';
-import { createTimer } from "../libs/api_create_timer.js";
+import {createSession, sessionCreateNextTimer} from "../libs/api_create_timer.js";
 
-export default function ViewTimersPresets({type}) {
+export default function ViewTimersPresets({type, from_timer: fromTimer}) {
     const params = useParams()
     const navigate = useNavigate()
     const queryClient = useQueryClient()
+    const location = useLocation()
 
     const options_fetch = type
         ? {
@@ -19,10 +20,19 @@ export default function ViewTimersPresets({type}) {
     const [loading, data, errors] = useFetch('timers_preset', options_fetch)
 
     const handleSelectPreset = async (duration, type) => {
-        createTimer(duration, 'running', type).then(response => {
-            queryClient.invalidateQueries({queryKey: ['timer', params.id]})
-            navigate(`/timer/${response.id}`)
-        })
+        if (location.pathname.startsWith('/session')) {
+            const rx = /\/session\/(\d*)/g
+            const arr = rx.exec(location.pathname)
+
+            sessionCreateNextTimer(arr[1], fromTimer, duration, type).then(response => {
+                queryClient.invalidateQueries({queryKey: ['session', params.id]})
+            })
+        } else {
+            createSession(duration, 'running', type).then(response => {
+                queryClient.invalidateQueries({queryKey: ['session', params.id]})
+                navigate(`/session/${response.id}`)
+            })
+        }
     }
 
     if (loading) {

@@ -3,7 +3,7 @@ import {useNavigate} from "react-router";
 import {Container} from "react-bootstrap";
 
 import ViewTimersPresets from './components/ViewTimersPresets.jsx';
-import { createTimer, createSevenByNine } from "./libs/api_create_timer.js";
+import { createSession, createSevenByNine } from "./libs/api_create_timer.js";
 
 function CreateTimer() {
     const [inputs, setInputs] = useState({type: 'task'})
@@ -22,12 +22,12 @@ function CreateTimer() {
             return
         }
 
-        const response = await createTimer(
+        const response = await createSession(
             inputs.durationInMinutes * 60,
             inputs.isPauseChecked ? 'paused' : 'running',
             inputs.type,
         )
-        navigate(`/timer/${response.id}`)
+        navigate(`/session/${response.id}`)
     }
 
     const handleSevenByNineSubmit = async e => {
@@ -81,7 +81,7 @@ function CreateTimer() {
                     />
                 </div>
 
-                <button className="mt-3 btn btn-primary" onClick={handleSubmit}>Submit</button>
+                <button className="mt-3 btn btn-primary" onClick={handleSubmit}>Lancer</button>
             </div>
         </Container>
     )

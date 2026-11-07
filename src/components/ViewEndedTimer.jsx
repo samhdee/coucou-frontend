@@ -11,19 +11,19 @@ export default function ViewEndedTimer({data}) {
     useEffect(() => {
         const timer_ding_filename = data.type === 'task' ? 'task-ended-ding' : 'pause-ended-ding'
         const audio = new Audio(`/sounds/${timer_ding_filename}.mp3`)
-        audio.loop = false; // optionnel : boucle jusqu'à ce que l'utilisateur ferme
+        audio.loop = false
 
         audio.play()
             .catch((err) => {
                 if (err.name !== 'AbortError') {
-                    console.error('Impossible de jouer le son :', err);
+                    console.error('Impossible de jouer le son :', err)
                 }
-            });
+            })
 
         // Nettoyage : coupe le son quand le composant se démonte
         return () => {
-          audio.pause();
-          audio.currentTime = 0;
+          audio.pause()
+          audio.currentTime = 0
         };
       }, []);
 
@@ -37,11 +37,11 @@ export default function ViewEndedTimer({data}) {
                 {data.type === 'pause'
                     ? <>
                         <p>On reprend ?</p>
-                        <ViewTimersPresets type="task" />
+                        <ViewTimersPresets type="task" from_timer={data.id} />
                     </>
                     : <>
                         <p>Une petite pause ?</p>
-                        <ViewTimersPresets type="pause" />
+                        <ViewTimersPresets type="pause" from_timer={data.id} />
                     </>
                 }
             </div>

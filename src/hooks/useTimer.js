@@ -5,9 +5,9 @@ export function useTimer(id, isRunning) {
     const queryClient = useQueryClient()
 
     const query = useQuery({
-        queryKey: ['timer', id],
+        queryKey: ['session', id],
         queryFn: async () => {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/timer/${id}`)
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/session/${id}`)
 
             if (!res.ok) {
                 throw new Error('Timer introuvable')
@@ -19,11 +19,11 @@ export function useTimer(id, isRunning) {
 
     useEffect(() => {
         const url = new URL(import.meta.env.VITE_HUB_URL)
-        url.searchParams.append('topic', `timer/${id}`)
+        url.searchParams.append('topic', `session/${id}`)
         const es = new EventSource(url)
 
         es.onmessage = (event) => {
-            queryClient.setQueryData(['timer', id], JSON.parse(event.data))
+            queryClient.setQueryData(['session', id], JSON.parse(event.data))
         }
 
         return () => es.close()

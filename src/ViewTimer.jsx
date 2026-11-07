@@ -8,6 +8,7 @@ import ViewEndedTimer from "./components/ViewEndedTimer.jsx";
 import {useTimer} from "./hooks/useTimer.js";
 import {useToggleTimer} from "./hooks/useToggleTimer.js";
 import BackButton from "./components/BackButton.jsx";
+import {useCountdown} from "./hooks/useCountdown.js";
 
 export default function ViewTimerPage() {
     const {id} = useParams();
@@ -15,13 +16,9 @@ export default function ViewTimerPage() {
 }
 
 function ViewTimer({ id }) {
-    const [hasEnded, setHasEnded] = useState(false)
     const { data, isLoading, error } = useTimer(id)
     const toggleTimer = useToggleTimer(id)
-
-    const handleEndTimer = () => {
-        setHasEnded(true)
-    }
+    const { remainingSeconds, hasEnded } = useCountdown(data?.currentTimer)
 
     if (isLoading) {
         return <div>Chargement…</div>
@@ -32,27 +29,27 @@ function ViewTimer({ id }) {
     }
 
     if (hasEnded) {
-        return <ViewEndedTimer data={data} />
+        return <ViewEndedTimer data={data.currentTimer} />
     }
 
     const handleToggleStatus = () => {
-        toggleTimer.mutate(data.status === 'running' ? 'pause' : 'start')
+        toggleTimer.mutate(data.currentTimer.status === 'running' ? 'pause' : 'start')
     }
 
     return (
         <Container className="py-3">
             <BackButton />
 
-            {data.status === 'running'
+            {data.currentTimer && data.currentTimer.status === 'running'
                 ? <ViewRunningTimer
-                    key={data.id }
-                    data={data}
+                    key={data.currentTimer.id }
+                    remainingSeconds={remainingSeconds}
+                    type={data.currentTimer.type}
                     handleStatusChange={handleToggleStatus}
-                    handleEndTimer={handleEndTimer}
                 />
                 : <ViewPausedTimer
-                    key={data.id}
-                    data={data}
+                    key={data.currentTimer.id}
+                    remainingSeconds={remainingSeconds}
                     handleStatusChange={handleToggleStatus}
                 />
             }

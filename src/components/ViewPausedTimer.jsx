@@ -1,13 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
-export default function ViewPausedTimer({ data, handleStatusChange }) {
-    const minutes = Math.floor(data.remainingAtPause / 60);
-    let seconds = data.remainingAtPause % 60;
-
-    if (seconds <= 9) {
-        seconds = '0' + seconds;
-    }
+export default function ViewPausedTimer({ remainingSeconds, handleStatusChange }) {
+    const minutes = Math.floor(remainingSeconds / 60)
+    const seconds = String(remainingSeconds % 60).padStart(2, '0')
 
     const handleClick = e => {
         e.preventDefault()
