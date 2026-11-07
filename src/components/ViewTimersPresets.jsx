@@ -20,8 +20,8 @@ export default function ViewTimersPresets({type}) {
 
     const handleSelectPreset = async (duration, type) => {
         createTimer(duration, 'running', type).then(response => {
-            queryClient.invalidateQueries({queryKey: ['timer', params.id]})
-            navigate(`/timer/${response.id}`)
+            queryClient.invalidateQueries({queryKey: ['session', params.id]})
+            navigate(`/session/${response.id}`)
         })
     }
 

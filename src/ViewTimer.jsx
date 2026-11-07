@@ -23,7 +23,7 @@ function ViewTimer({ id }) {
         setHasEnded(true)
     }
 
-    if (isLoading) {
+    if (isLoading || !data.currentTimer) {
         return <div>Chargement…</div>
     }
 
@@ -32,27 +32,27 @@ function ViewTimer({ id }) {
     }
 
     if (hasEnded) {
-        return <ViewEndedTimer data={data} />
+        return <ViewEndedTimer data={data.currentTimer} />
     }
 
     const handleToggleStatus = () => {
-        toggleTimer.mutate(data.status === 'running' ? 'pause' : 'start')
+        toggleTimer.mutate(data.currentTimer.status === 'running' ? 'pause' : 'start')
     }
 
     return (
         <Container className="py-3">
             <BackButton />
 
-            {data.status === 'running'
+            {data.currentTimer && data.currentTimer.status === 'running'
                 ? <ViewRunningTimer
-                    key={data.id }
-                    data={data}
+                    key={data.currentTimer.id }
+                    data={data.currentTimer}
                     handleStatusChange={handleToggleStatus}
                     handleEndTimer={handleEndTimer}
                 />
                 : <ViewPausedTimer
-                    key={data.id}
-                    data={data}
+                    key={data.currentTimer.id}
+                    data={data.currentTimer}
                     handleStatusChange={handleToggleStatus}
                 />
             }

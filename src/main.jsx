@@ -28,7 +28,7 @@ createRoot(document.getElementById('root')).render(
                     <div id="main-container">
                         <Routes>
                             <Route path="/" element={<CreateTimer />} />
-                            <Route path="/timer/:id" element={<ViewTimer />} />
+                            <Route path="/session/:id" element={<ViewTimer />} />
                             <Route path="/seven-by-nine/:id" element={<ViewSevenByNine />} />
                         </Routes>
                     </div>

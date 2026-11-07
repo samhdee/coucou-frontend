@@ -5,7 +5,7 @@ export function useToggleTimer(id) {
 
     return useMutation({
         mutationFn: async (action) => {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/timer/${id}/${action}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/session/${id}/${action}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
             })
@@ -17,7 +17,7 @@ export function useToggleTimer(id) {
             return res.json()
         },
         onSuccess: (data) => {
-            queryClient.setQueryData(['timer', id], data)
+            queryClient.setQueryData(['session', id], data)
         },
         onerror: (error) => {
             console.error(error)

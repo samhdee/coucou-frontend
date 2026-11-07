@@ -5,5 +5,4 @@ const eventSource = new EventSource(url);
 
 eventSource.onmessage = (event) => {
     const data = JSON.parse(event.data);
-    console.log(data);
 };

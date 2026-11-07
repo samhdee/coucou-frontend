@@ -27,7 +27,7 @@ function CreateTimer() {
             inputs.isPauseChecked ? 'paused' : 'running',
             inputs.type,
         )
-        navigate(`/timer/${response.id}`)
+        navigate(`/session/${response.id}`)
     }
 
     const handleSevenByNineSubmit = async e => {
@@ -81,7 +81,7 @@ function CreateTimer() {
                     />
                 </div>
 
-                <button className="mt-3 btn btn-primary" onClick={handleSubmit}>Submit</button>
+                <button className="mt-3 btn btn-primary" onClick={handleSubmit}>Lancer</button>
             </div>
         </Container>
     )

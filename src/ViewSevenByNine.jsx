@@ -26,11 +26,7 @@ export default function SevenByNine() {
 
     // Start/pause du timer
     const handleStatusChange = () => {
-        toggleTimer.mutate(data.currentTimer.status === 'running' ? 'pause' : 'start', {
-            onSuccess: () => {
-                queryClient.invalidateQueries({queryKey: ['sevenByNine', params.id]})
-            },
-        })
+        toggleTimer.mutate(data.currentTimer.status === 'running' ? 'pause' : 'start')
     }
 
     // Fin du timer
