@@ -1,11 +1,16 @@
 import {useEffect, useRef} from "react";
-import {Link} from "react-router";
+import {Link, useLocation} from "react-router";
 import {Container} from "react-bootstrap";
 
 import ViewTimersPresets from "./ViewTimersPresets";
+import CreateTimerForm from "./CreateTimerForm.jsx";
+import {sessionCreateNextTimer} from "../libs/api_create_timer.js";
+import {useQueryClient} from "@tanstack/react-query";
 
 export default function ViewEndedTimer({data}) {
-    const audioRef = useRef(null);
+    const audioRef = useRef(null)
+    const queryClient = useQueryClient()
+    const location = useLocation()
 
     // Précharger le son une seule fois
     useEffect(() => {
@@ -25,7 +30,16 @@ export default function ViewEndedTimer({data}) {
           audio.pause()
           audio.currentTime = 0
         };
-      }, []);
+      }, [])
+
+    const handleNewTimerSubmit = inputs => {
+        const rx = /\/session\/(\d*)/g
+        const arr = rx.exec(location.pathname)
+
+        sessionCreateNextTimer(arr[1], data.id, inputs.durationInMinutes * 60, inputs.type).then(response => {
+            queryClient.invalidateQueries({queryKey: ['session', arr[1]]})
+        })
+    }
 
     return (
         <Container className="py-3">
@@ -44,6 +58,8 @@ export default function ViewEndedTimer({data}) {
                         <ViewTimersPresets type="pause" from_timer={data.id} />
                     </>
                 }
+
+                <CreateTimerForm propsHandleSubmit={handleNewTimerSubmit} />
             </div>
         </Container>
     )

@@ -16,9 +16,15 @@ export default function ViewTimerPage() {
 }
 
 function ViewTimer({ id }) {
+    const [isLocked, setIsLocked] = useState(true);
     const { data, isLoading, error } = useTimer(id)
     const toggleTimer = useToggleTimer(id)
     const { remainingSeconds, hasEnded } = useCountdown(data?.currentTimer)
+
+    const handleUnlockClick = e => {
+        e.preventDefault()
+        setIsLocked(false)
+    }
 
     if (isLoading) {
         return <div>Chargement…</div>
@@ -26,6 +32,12 @@ function ViewTimer({ id }) {
 
     if (error) {
         return <div className="alert alert-danger">Impossible de récupérer le timer.</div>
+    }
+
+    if (isLocked) {
+        return <div className="text-center">
+            <button className="btn btn-primary text-center" onClick={handleUnlockClick}>Rejoindre</button>
+        </div>
     }
 
     if (hasEnded) {
