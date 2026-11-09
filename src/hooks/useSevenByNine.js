@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
+import {getData} from "../libs/api.js";
 
 export function useSevenByNine(id, isRunning) {
     const queryClient = useQueryClient()
@@ -7,7 +8,7 @@ export function useSevenByNine(id, isRunning) {
     const query = useQuery({
         queryKey: ['seven-by-nine', id],
         queryFn: async () => {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/seven-by-nine/${id}`)
+            const res = await getData(`${import.meta.env.VITE_API_URL}/seven-by-nine/${id}`)
 
             if (!res.ok) {
                 throw new Error('Timer introuvable')

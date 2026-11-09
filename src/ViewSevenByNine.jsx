@@ -79,6 +79,8 @@ export default function SevenByNine() {
         <Container className="py-3">
             <BackButton />
 
+            {data.attendants.length > 0 && data.attendants.map(attendant => <div>{attendant.id}</div>)}
+
             <div className="mt-3 text-center">
                 En cours : {data.currentTimer.type === 'task'
                 ? <>
