@@ -6,10 +6,12 @@ import {useQueryClient} from '@tanstack/react-query'
 import ViewRunningTimer from "./components/ViewRunningTimer.jsx";
 import ViewPausedTimer from "./components/ViewPausedTimer.jsx";
 import {useSevenByNine} from "./hooks/useSevenByNine.js";
-import {useEndTimer} from "./hooks/useEndTimer.js";
+import {useEndSevenByNineTimer} from "./hooks/useEndSevenByNineTimer.js";
 import BackButton from "./components/BackButton.jsx";
 import {useCountdown} from "./hooks/useCountdown.js";
 import {useToggleSevenByNine} from "./hooks/useToggleSevenByNine.js";
+import ViewEndedTimer from "./components/ViewEndedTimer.jsx";
+import useTimerEndDing from "./hooks/useTimerEndDing.js";
 
 export default function SevenByNine() {
     const params = useParams()
@@ -18,8 +20,9 @@ export default function SevenByNine() {
     const [isLocked, setIsLocked] = useState(true);
     const {data, isLoading, error} = useSevenByNine(params.id)
     const toggleTimer = useToggleSevenByNine(params.id)
-    const endTimer = useEndTimer()
+    const endTimer = useEndSevenByNineTimer()
     const { remainingSeconds, hasEnded } = useCountdown(data?.currentTimer)
+    useTimerEndDing(data?.currentTimer.type, hasEnded)
 
     const handleUnlockClick = e => {
         e.preventDefault()
@@ -96,6 +99,7 @@ export default function SevenByNine() {
                     key={data.currentTimer.position}
                     remainingSeconds={remainingSeconds}
                     handleStatusChange={handleStatusChange}
+                    type={data.currentTimer.type}
                     handleEndTimer={handleEndTimer}
                 />
                 : <ViewPausedTimer

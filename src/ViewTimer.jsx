@@ -41,7 +41,7 @@ function ViewTimer({ id }) {
     }
 
     if (hasEnded) {
-        return <ViewEndedTimer data={data.currentTimer} />
+        return <ViewEndedTimer timer={data.currentTimer} />
     }
 
     const handleToggleStatus = () => {

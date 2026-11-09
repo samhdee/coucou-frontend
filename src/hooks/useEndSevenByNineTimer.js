@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { patchData } from '../libs/api.js'
 
-export function useEndTimer(sessionId) {
+export function useEndSevenByNineTimer(sessionId) {
     const queryClient = useQueryClient()
 
     return useMutation({
