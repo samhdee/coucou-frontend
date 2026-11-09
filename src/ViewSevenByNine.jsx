@@ -1,5 +1,5 @@
 import {Link, useParams} from "react-router";
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Container} from "react-bootstrap";
 import {useQueryClient} from '@tanstack/react-query'
 
@@ -15,10 +15,16 @@ export default function SevenByNine() {
     const params = useParams()
     const queryClient = useQueryClient()
     const timerHasEndedRef = useRef(false)
+    const [isLocked, setIsLocked] = useState(true);
     const {data, isLoading, error} = useSevenByNine(params.id)
     const toggleTimer = useToggleSevenByNine(params.id)
     const endTimer = useEndTimer()
     const { remainingSeconds, hasEnded } = useCountdown(data?.currentTimer)
+
+    const handleUnlockClick = e => {
+        e.preventDefault()
+        setIsLocked(false)
+    }
 
     const timer_id = data?.currentTimer.id
 
@@ -56,6 +62,12 @@ export default function SevenByNine() {
 
     if (error) {
         return <div className="alert alert-danger">Erreur lors du chargement</div>
+    }
+
+    if (isLocked) {
+        return <div className="text-center">
+            <button className="btn btn-primary text-center" onClick={handleUnlockClick}>Rejoindre</button>
+        </div>
     }
 
     const last_drawn_value = data.drawnValues[Object.keys(data.drawnValues).pop()];
