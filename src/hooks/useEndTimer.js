@@ -12,12 +12,12 @@ export function useEndTimer(sessionId) {
         onSuccess: (data) => {
             if (!data?.currentTimer) {
                 // structure inattendue → on force un refetch pour repartir propre
-                queryClient.invalidateQueries({ queryKey: ['sevenByNine', sessionId] })
+                queryClient.invalidateQueries({ queryKey: ['seven-by-nine', sessionId] })
                 return
             }
 
             // ⬇️ data = la réponse complète du back, même forme que useSevenByNine
-            queryClient.setQueryData(['sevenByNine', sessionId], data)
+            queryClient.setQueryData(['seven-by-nine', sessionId], data)
         },
         onError: (error) => {
             console.error(error)

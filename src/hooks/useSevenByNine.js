@@ -5,7 +5,7 @@ export function useSevenByNine(id, isRunning) {
     const queryClient = useQueryClient()
 
     const query = useQuery({
-        queryKey: ['sevenByNine', id],
+        queryKey: ['seven-by-nine', id],
         queryFn: async () => {
             const res = await fetch(`${import.meta.env.VITE_API_URL}/seven-by-nine/${id}`)
 
@@ -19,11 +19,11 @@ export function useSevenByNine(id, isRunning) {
 
     useEffect(() => {
         const url = new URL(import.meta.env.VITE_HUB_URL)
-        url.searchParams.append('topic', `timer/${id}`)
+        url.searchParams.append('topic', `seven-by-nine/${id}`)
         const es = new EventSource(url)
 
         es.onmessage = (event) => {
-            queryClient.setQueryData(['sevenByNine', id], JSON.parse(event.data))
+            queryClient.setQueryData(['seven-by-nine', id], JSON.parse(event.data))
         }
 
         return () => es.close()

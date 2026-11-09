@@ -6,17 +6,19 @@ import {useQueryClient} from '@tanstack/react-query'
 import ViewRunningTimer from "./components/ViewRunningTimer.jsx";
 import ViewPausedTimer from "./components/ViewPausedTimer.jsx";
 import {useSevenByNine} from "./hooks/useSevenByNine.js";
-import {useToggleTimer} from "./hooks/useToggleTimer.js";
 import {useEndTimer} from "./hooks/useEndTimer.js";
 import BackButton from "./components/BackButton.jsx";
+import {useCountdown} from "./hooks/useCountdown.js";
+import {useToggleSevenByNine} from "./hooks/useToggleSevenByNine.js";
 
 export default function SevenByNine() {
     const params = useParams()
     const queryClient = useQueryClient()
     const timerHasEndedRef = useRef(false)
     const {data, isLoading, error} = useSevenByNine(params.id)
-    const toggleTimer = useToggleTimer(data?.currentTimer.id)
+    const toggleTimer = useToggleSevenByNine(params.id)
     const endTimer = useEndTimer()
+    const { remainingSeconds, hasEnded } = useCountdown(data?.currentTimer)
 
     const timer_id = data?.currentTimer.id
 
@@ -26,7 +28,8 @@ export default function SevenByNine() {
 
     // Start/pause du timer
     const handleStatusChange = () => {
-        toggleTimer.mutate(data.currentTimer.status === 'running' ? 'pause' : 'start')
+        const action = data.currentTimer.status === 'running' ? 'pause' : 'start'
+        toggleTimer.mutate(action)
     }
 
     // Fin du timer
@@ -39,7 +42,7 @@ export default function SevenByNine() {
 
         endTimer.mutate({sevenByNineId: data.id, fromPosition: data.currentTimer.position}, {
             onSuccess: () => {
-                queryClient.invalidateQueries({queryKey: ['sevenByNine', params.id]})
+                queryClient.invalidateQueries({queryKey: ['seven-by-nine', params.id]})
             },
             onError: () => {
                 timerHasEndedRef.current = false // permet de réessayer si l'appel a échoué
@@ -79,13 +82,13 @@ export default function SevenByNine() {
             {data.currentTimer.status === 'running'
                 ? <ViewRunningTimer
                     key={data.currentTimer.position}
-                    data={data.currentTimer}
+                    remainingSeconds={remainingSeconds}
                     handleStatusChange={handleStatusChange}
                     handleEndTimer={handleEndTimer}
                 />
                 : <ViewPausedTimer
                     key={data.currentTimer.position}
-                    data={data.currentTimer}
+                    remainingSeconds={remainingSeconds}
                     handleStatusChange={handleStatusChange}
                 />
             }
