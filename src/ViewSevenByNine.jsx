@@ -10,8 +10,10 @@ import {useEndSevenByNineTimer} from "./hooks/useEndSevenByNineTimer.js";
 import BackButton from "./components/BackButton.jsx";
 import {useCountdown} from "./hooks/useCountdown.js";
 import {useToggleSevenByNine} from "./hooks/useToggleSevenByNine.js";
-import ViewEndedTimer from "./components/ViewEndedTimer.jsx";
 import useTimerEndDing from "./hooks/useTimerEndDing.js";
+import ViewAttendants from "./components/ViewAttendants.jsx";
+
+import '../styles/seance.scss';
 
 export default function SevenByNine() {
     const params = useParams()
@@ -76,40 +78,42 @@ export default function SevenByNine() {
     const last_drawn_value = data.drawnValues[Object.keys(data.drawnValues).pop()];
 
     return (
-        <Container className="py-3">
-            <BackButton />
+        <>
+            <ViewAttendants id={data.id} />
+            <Container className="py-3">
+                <BackButton />
 
-            {data.attendants.length > 0 && data.attendants.map(attendant => <div>{attendant.id}</div>)}
 
-            <div className="mt-3 text-center">
-                En cours : {data.currentTimer.type === 'task'
-                ? <>
-                    tâche <span className="fw-bold">{data.countTasks}/7</span>
-                </>
-                : <>
-                    pause <span className="fw-bold">{data.countTasks}/6</span>
-                </>
-            }
-            </div>
+                <div className="mt-3 text-center">
+                    En cours : {data.currentTimer.type === 'task'
+                    ? <>
+                        tâche <span className="fw-bold">{data.countTasks}/7</span>
+                    </>
+                    : <>
+                        pause <span className="fw-bold">{data.countTasks}/6</span>
+                    </>
+                }
+                </div>
 
-            <div id="drawn-value-wrapper" className="mt-3 border rounded-1 mx-auto text-center">
-                Tirage : n°<span className="fw-bold fs-3">{last_drawn_value}</span> !
-            </div>
+                <div id="drawn-value-wrapper" className="mt-3 border rounded-1 mx-auto text-center">
+                    Tirage : n°<span className="fw-bold fs-3">{last_drawn_value}</span> !
+                </div>
 
-            {data.currentTimer.status === 'running'
-                ? <ViewRunningTimer
-                    key={data.currentTimer.position}
-                    remainingSeconds={remainingSeconds}
-                    handleStatusChange={handleStatusChange}
-                    type={data.currentTimer.type}
-                    handleEndTimer={handleEndTimer}
-                />
-                : <ViewPausedTimer
-                    key={data.currentTimer.position}
-                    remainingSeconds={remainingSeconds}
-                    handleStatusChange={handleStatusChange}
-                />
-            }
-        </Container>
+                {data.currentTimer.status === 'running'
+                    ? <ViewRunningTimer
+                        key={data.currentTimer.position}
+                        remainingSeconds={remainingSeconds}
+                        handleStatusChange={handleStatusChange}
+                        type={data.currentTimer.type}
+                        handleEndTimer={handleEndTimer}
+                    />
+                    : <ViewPausedTimer
+                        key={data.currentTimer.position}
+                        remainingSeconds={remainingSeconds}
+                        handleStatusChange={handleStatusChange}
+                    />
+                }
+            </Container>
+        </>
     )
 }

@@ -5,7 +5,7 @@ import {Container} from "react-bootstrap";
 import ViewRunningTimer from "./components/ViewRunningTimer.jsx";
 import ViewPausedTimer from "./components/ViewPausedTimer.jsx";
 import ViewEndedTimer from "./components/ViewEndedTimer.jsx";
-import {useTimer} from "./hooks/useTimer.js";
+import {useSession} from "./hooks/useSession.js";
 import {useToggleTimer} from "./hooks/useToggleTimer.js";
 import BackButton from "./components/BackButton.jsx";
 import {useCountdown} from "./hooks/useCountdown.js";
@@ -17,7 +17,7 @@ export default function ViewTimerPage() {
 
 function ViewTimer({ id }) {
     const [isLocked, setIsLocked] = useState(true);
-    const { data, isLoading, error } = useTimer(id)
+    const { data, isLoading, error } = useSession(id)
     const toggleTimer = useToggleTimer(id)
     const { remainingSeconds, hasEnded } = useCountdown(data?.currentTimer)
 

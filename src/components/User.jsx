@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
 import { useAuth } from '../auth/context/AuthContext';
+import ViewDiscordAvatar from "./ViewDiscordAvatar.jsx";
 
 export default function User() {
     const {user, loading, logout} = useAuth()
@@ -20,11 +21,7 @@ export default function User() {
                 <>
                     <div>
                         <a href="#" onClick={handleClick}>
-                            <img
-                                id="user-avatar"
-                                src={`${import.meta.env.VITE_DISCORD_CDN_URL}/${user.discordId}/${user.avatar}`}
-                                alt="Avatar du compte Discord"
-                            />
+                            <ViewDiscordAvatar user={user} width={50} />
                         </a>
                     </div>
 

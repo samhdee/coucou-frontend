@@ -7,15 +7,7 @@ export function useSevenByNine(id, isRunning) {
 
     const query = useQuery({
         queryKey: ['seven-by-nine', id],
-        queryFn: async () => {
-            const res = await getData(`${import.meta.env.VITE_API_URL}/seven-by-nine/${id}`)
-
-            if (!res.ok) {
-                throw new Error('Timer introuvable')
-            }
-
-            return res.json()
-        },
+        queryFn: () => getData(`seven-by-nine/${id}`)
     })
 
     useEffect(() => {
