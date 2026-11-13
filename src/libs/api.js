@@ -13,7 +13,7 @@ export async function getData(uri) {
     const res = await fetch(`${API_URL}/${uri}`, { credentials: 'include' });
 
     if (!res.ok) {
-        throw new Error('Timer introuvable');
+        throw new Error('Données introuvables');
     }
 
     return res.json();
@@ -28,6 +28,7 @@ export async function patchData(uri, data = {}) {
     })
 
     if (!res.ok) {
+        console.error(res.status, res.statusText)
         throw new Error('Impossible de terminer le timer')
     }
 

@@ -12,7 +12,7 @@ export default function ViewRunningTimer({ remainingSeconds, type, handleStatusC
     }
 
     useEffect(() => {
-        if (minutes === 0 && seconds === '00') {
+        if (minutes === 0 && seconds === '00' && handleEndTimer) {
             handleEndTimer()
         }
     }, [minutes, seconds])

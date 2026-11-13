@@ -1,20 +1,13 @@
 import { useEffect } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
+import {getData} from "../libs/api.js";
 
-export function useTimer(id, isRunning) {
+export function useSession(id, isRunning) {
     const queryClient = useQueryClient()
 
     const query = useQuery({
         queryKey: ['session', id],
-        queryFn: async () => {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/session/${id}`)
-
-            if (!res.ok) {
-                throw new Error('Timer introuvable')
-            }
-
-            return res.json()
-        },
+        queryFn: () => getData(`session/${id}`)
     })
 
     useEffect(() => {

@@ -3,7 +3,7 @@ import {getData} from "../libs/api.js";
 
 export function useTimersPreset(type) {
     return useQuery({
-        queryKey: ['timers_preset', id],
+        queryKey: ['timers_preset', type],
         queryFn: async () => {
             const res = await getData(`timers_preset`)
 
