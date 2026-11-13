@@ -9,13 +9,14 @@ import {useSession} from "./hooks/useSession.js";
 import {useToggleTimer} from "./hooks/useToggleTimer.js";
 import BackButton from "./components/BackButton.jsx";
 import {useCountdown} from "./hooks/useCountdown.js";
+import ViewAttendants from "./components/ViewAttendants.jsx";
 
 export default function ViewTimerPage() {
     const {id} = useParams();
-    return <ViewTimer key={id} id={id} />
+    return <ViewSession key={id} id={id} />
 }
 
-function ViewTimer({ id }) {
+function ViewSession({ id }) {
     const [isLocked, setIsLocked] = useState(true);
     const { data, isLoading, error } = useSession(id)
     const toggleTimer = useToggleTimer(id)
@@ -51,6 +52,8 @@ function ViewTimer({ id }) {
     return (
         <Container className="py-3">
             <BackButton />
+
+            <ViewAttendants id={data.id} type="session" />
 
             {data.currentTimer && data.currentTimer.status === 'running'
                 ? <ViewRunningTimer

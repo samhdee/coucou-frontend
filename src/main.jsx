@@ -7,7 +7,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import {Container} from "react-bootstrap";
 
 import CreateTimer from './CreateTimer.jsx'
-import ViewTimer from "./ViewTimer.jsx";
+import ViewSession from "./ViewSession.jsx";
 import ViewSevenByNine from "./ViewSevenByNine.jsx";
 import { AuthProvider } from './auth/context/AuthContext.jsx';
 import User from './components/User.jsx';
@@ -28,7 +28,7 @@ createRoot(document.getElementById('root')).render(
                     <div id="main-container">
                         <Routes>
                             <Route path="/" element={<CreateTimer />} />
-                            <Route path="/session/:id" element={<ViewTimer />} />
+                            <Route path="/session/:id" element={<ViewSession />} />
                             <Route path="/seven-by-nine/:id" element={<ViewSevenByNine />} />
                         </Routes>
                     </div>

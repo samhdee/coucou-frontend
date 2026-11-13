@@ -79,7 +79,8 @@ export default function SevenByNine() {
 
     return (
         <>
-            <ViewAttendants id={data.id} />
+            <ViewAttendants id={data.id} type="seven-by-nine" />
+
             <Container className="py-3">
                 <BackButton />
 

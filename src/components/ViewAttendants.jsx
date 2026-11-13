@@ -1,8 +1,8 @@
 import {usePresence} from "../hooks/usePresence.js";
 import ViewDiscordAvatar from "./ViewDiscordAvatar.jsx";
 
-export default function ViewAttendants({id}) {
-    const attendants = usePresence('seven-by-nine', id)
+export default function ViewAttendants({id, type}) {
+    const attendants = usePresence(type, id)
 
     return (
         <div id="attendants-wrapper">
