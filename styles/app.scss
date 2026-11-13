@@ -59,6 +59,10 @@ body {
             }
         }
 
+        #create-timer-wrapper {
+            width: 25%;
+        }
+
         #timers-presets-wrapper {
             .preset-task {
                 background: #74226c;
@@ -84,6 +88,26 @@ body {
 
             a {
                 color: white;
+            }
+        }
+    }
+
+    @media (max-width: 992px) {
+        #root {
+            #create-timer-wrapper {
+                width: 80%;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        #root {
+            #user-bar {
+                padding-right: 20px;
+            }
+
+            #create-timer-wrapper {
+                width: 100%;
             }
         }
     }

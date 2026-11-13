@@ -6,7 +6,7 @@ export default function ViewAttendants({id}) {
 
     return (
         <div id="attendants-wrapper">
-            Présent.e.s sur ce coucou :
+            <div id="attendants-title">Présent.e.s sur ce coucou :</div>
 
             {attendants.map((attendant, index) => (
                 <div className="attendant mt-1" key={index}>
@@ -15,7 +15,7 @@ export default function ViewAttendants({id}) {
                             <ViewDiscordAvatar user={attendant.user} width={40} />
                             <span className="ms-1">{attendant.user.username}</span>
                         </>
-                        : 'Invité.e'}
+                        : <span className="guest-attendant">Invité.e</span>}
                 </div>
             ))}
         </div>

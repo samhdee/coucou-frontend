@@ -34,7 +34,7 @@ createRoot(document.getElementById('root')).render(
                     </div>
 
                     <footer>
-                        <Container className="text-center">
+                        <Container fluid={"md"} className="text-center">
                             <a
                                 href="https://github.com/stars/samhdee/lists/coucou"
                                 target="_blank"
