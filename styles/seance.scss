@@ -1,5 +1,27 @@
 #attendants-wrapper {
     position: absolute;
+    top: 100px;
     right: 0;
     width: 200px;
+
+    @media (max-width: 768px) {
+        top: auto;
+        right: auto;
+        bottom: 50px;
+        left: 20px;
+        width: auto;
+        display: flex;
+
+        #attendants-title {
+            display: none;
+        }
+
+        .attendant {
+            margin-right: 20px;
+
+            .guest-attendant {
+                line-height: 2.4rem;
+            }
+        }
+    }
 }

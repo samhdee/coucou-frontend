@@ -28,7 +28,7 @@ function CreateTimer() {
     }
 
     return (
-        <Container id="view-timer-wrapper" className="mx-auto py-3 w-25">
+        <Container id="create-timer-wrapper" className="mx-auto py-3">
             <ViewTimersPresets/>
 
             <div className="mt-4">
